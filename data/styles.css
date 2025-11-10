@@ -1,0 +1,42 @@
+:root{
+  --bg:#0b0f14; --panel:#121821; --muted:#9fb0c0; --text:#e6eef6; --brand:#4cc9f0; --accent:#b5179e;
+}
+*{box-sizing:border-box}
+body{
+  margin:0; font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
+  color:var(--text); background:linear-gradient(180deg,#0b0f14,#0e141d 40%, #0b0f14);
+}
+a{color:var(--brand); text-decoration:none}
+a:hover{opacity:.85}
+.container{max-width:1100px; margin-inline:auto; padding:24px}
+.nav{
+  position:sticky; top:0; z-index:20;
+  backdrop-filter:saturate(160%) blur(10px);
+  background:rgba(10,14,20,.6); border-bottom:1px solid rgba(255,255,255,.06)
+}
+.nav-inner{display:flex;gap:18px; align-items:center; justify-content:space-between; padding:14px 24px}
+.brand{font-weight:700; letter-spacing:.4px}
+.nav a{padding:6px 10px; border-radius:10px}
+.nav a.active, .btn-primary{background:linear-gradient(135deg,var(--brand),#58d6ff); color:#00121c}
+.hero{padding:48px 24px; text-align:center}
+.hero h1{margin:0 0 10px; font-size:34px}
+.hero p{color:var(--muted); margin:0 auto 12px; max-width:720px}
+.panel{
+  background:linear-gradient(180deg,#0d141d,#0b1016); border:1px solid rgba(255,255,255,.06);
+  border-radius:18px; padding:16px; box-shadow:0 10px 30px rgba(0,0,0,.35)
+}
+.controls{display:flex; gap:12px; flex-wrap:wrap; align-items:center; margin-bottom:10px}
+label{font-size:13px; color:var(--muted)}
+select,input[type="text"],input[type="range"],button{
+  background:#0e1520; color:var(--text); border:1px solid rgba(255,255,255,.08); border-radius:12px; padding:8px 10px
+}
+input[type="range"]{width:160px}
+button{cursor:pointer}
+.btn-primary{padding:10px 14px; border:none}
+.grid{display:grid; grid-template-columns:repeat(12,1fr); gap:16px}
+.card{grid-column:span 6; background:var(--panel); border:1px solid rgba(255,255,255,.06); border-radius:16px; padding:12px}
+@media (max-width:900px){ .card{grid-column:span 12} }
+.map{height:65vh; border-radius:14px; overflow:hidden; border:1px solid rgba(255,255,255,.06)}
+.small-map{height:380px; border-radius:12px; overflow:hidden; border:1px solid rgba(255,255,255,.06)}
+footer{opacity:.7; padding:28px 24px; text-align:center}
+.badge{font-size:12px; padding:2px 8px; border:1px solid rgba(255,255,255,.12); border-radius:999px; color:var(--muted)}
