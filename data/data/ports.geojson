@@ -1,0 +1,8 @@
+{
+  "type":"FeatureCollection",
+  "features":[
+    {"type":"Feature","properties":{"name":"Shanghai"},"geometry":{"type":"Point","coordinates":[121.491,31.222]}},
+    {"type":"Feature","properties":{"name":"Rotterdam"},"geometry":{"type":"Point","coordinates":[4.479,51.924]}},
+    {"type":"Feature","properties":{"name":"Los Angeles"},"geometry":{"type":"Point","coordinates":[-118.265,34.053]}}
+  ]
+}
