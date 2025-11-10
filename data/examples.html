@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Examples — Atlas Geolab</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+</head>
+<body>
+  <nav class="nav">
+    <div class="nav-inner">
+      <div class="brand">🗺️ Atlas Geolab</div>
+      <div>
+        <a href="./">Home</a>
+        <a class="active" href="examples.html">Examples</a>
+        <a href="how-it-works.html">How it works</a>
+        <a href="offer.html" class="btn-primary">Our offer</a>
+      </div>
+    </div>
+  </nav>
+
+  <section class="container hero">
+    <h1>Playable examples</h1>
+    <p>Each map loads with a different overlay so visitors can see what’s possible.</p>
+  </section>
+
+  <section class="container grid">
+    <div class="card">
+      <h3>Ports & shipping</h3>
+      <div id="ex1" class="small-map"></div>
+    </div>
+    <div class="card">
+      <h3>Flood risk (toy polygons)</h3>
+      <div id="ex2" class="small-map"></div>
+    </div>
+    <div class="card">
+      <h3>Shipping lanes</h3>
+      <div id="ex3" class="small-map"></div>
+    </div>
+    <div class="card">
+      <h3>Wildfire risk (toy polygons)</h3>
+      <div id="ex4" class="small-map"></div>
+    </div>
+  </section>
+
+  <footer>© Atlas Geolab</footer>
+
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script>
+    const basemap = (id) => {
+      const layers = {
+        osm: L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{attribution:'© OSM'}),
+        carto_pos: L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png',{attribution:'© CARTO'}),
+        carto_dark: L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png',{attribution:'© CARTO'})
+      };
+      return layers[id] || layers.osm;
+    }
+
+    function smallMap(el, overlayUrl, styleFn, view=[20,0], zoom=2){
+      const m = L.map(el,{zoomControl:false});
+      basemap('carto_pos').addTo(m);
+      m.setView(view, zoom);
+      fetch(overlayUrl).then(r=>r.json()).then(g=>{
+        const layer = L.geoJSON(g,{style: styleFn, pointToLayer:(f,latlng)=>L.circleMarker(latlng,{radius:5, ...styleFn(f)})}).addTo(m);
+        m.fitBounds(layer.getBounds(),{maxZoom:5,padding:[10,10]});
+      });
+      return m;
+    }
+
+    smallMap('ex1','data/ports.geojson', ()=>({color:'#14b8a6', fillColor:'#14b8a6', weight:1, fillOpacity:.8}), [30,0], 2);
+    smallMap('ex2','data/flood_zones.geojson', ()=>({color:'#3b82f6', fillColor:'#3b82f6', weight:1, fillOpacity:.35}), [20,10], 3);
+    smallMap('ex3','data/shipping_lanes.geojson', ()=>({color:'#f59e0b', weight:2, opacity:.85}), [10,-20], 3);
+    smallMap('ex4','data/wildfire_risk.geojson', ()=>({color:'#ef4444', fillColor:'#ef4444', weight:1, fillOpacity:.35}), [40,-110], 3);
+  </script>
+</body>
+</html>
