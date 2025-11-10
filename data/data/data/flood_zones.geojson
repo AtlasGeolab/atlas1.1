@@ -1,0 +1,7 @@
+{
+  "type":"FeatureCollection",
+  "features":[
+    {"type":"Feature","properties":{"risk":"High"},"geometry":{"type":"Polygon","coordinates":[[[-0.6,51.6],[-0.6,51.3],[0.2,51.3],[0.2,51.6],[-0.6,51.6]]]}},
+    {"type":"Feature","properties":{"risk":"Medium"},"geometry":{"type":"Polygon","coordinates":[[[2.2,48.95],[2.2,48.75],[2.55,48.75],[2.55,48.95],[2.2,48.95]]]}}
+  ]
+}
